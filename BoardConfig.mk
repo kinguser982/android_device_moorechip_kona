@@ -27,7 +27,7 @@ AB_OTA_PARTITIONS += \
     system_ext \
     vendor \
     product
-BOARD_USES_RECOVERY_AS_BOOT := false
+
 
 # Architecture
 TARGET_ARCH := arm64
@@ -49,7 +49,7 @@ OVERRIDE_TARGET_FLATTEN_APEX := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := kona
-TARGET_NO_BOOTLOADER := true
+#TARGET_NO_BOOTLOADER := true
 
 # props
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
