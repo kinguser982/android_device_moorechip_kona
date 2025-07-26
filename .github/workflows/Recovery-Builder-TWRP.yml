@@ -1,5 +1,5 @@
 
-name: TWRP Recovery Builder 2024
+name: Recovery Builder
 
 on:
   workflow_dispatch:
