@@ -38,16 +38,6 @@ PRODUCT_RELEASE_NAME := kona
 # Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-PRODUCT_PACKAGES += \
-    fstab.qcom \
-    common.rc \
-    init.qcom.factory.rc \
-    init.qcom.rc \
-    init.qcom.usb.rc \
-    init.target.rc \
-    init.target.wigig.rc \
-    init.recovery.qcom.rc \
-
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
