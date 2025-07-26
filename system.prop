@@ -1,4 +1,3 @@
-ro.vendor.build.security_patch=2024-07-05
 ro.hardware.keystore=kona
 ro.hardware.gatekeeper=kona
 vendor.gatekeeper.disable_spu=true
