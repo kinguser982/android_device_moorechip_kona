@@ -5,10 +5,48 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# A/B
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+
+# Boot control HAL
+PRODUCT_PACKAGES += \
+    android.hardware.boot@1.2-impl \
+    android.hardware.boot@1.2-impl.recovery \
+    android.hardware.boot@1.2-service
+
+# Health
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-service
+
+# Overlays
+PRODUCT_ENFORCE_RRO_TARGETS := *
+
+# Product characteristics
+PRODUCT_CHARACTERISTICS := nosdcard
+
+
 LOCAL_PATH := device/moorechip/kona
+
 PRODUCT_RELEASE_NAME := kona
-PRODUCT_SHIPPING_API_LEVEL := 30
+
+# API levels
+# BOARD_API_LEVEL := 30
+# PRODUCT_SHIPPING_API_LEVEL := 30
+
+
+# Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
+PRODUCT_PACKAGES += \
+    fstab.qcom \
+    common.rc \
+    init.qcom.factory.rc \
+    init.qcom.rc \
+    init.qcom.usb.rc \
+    init.target.rc \
+    init.target.wigig.rc \
+    init.recovery.qcom.rc \
 
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
@@ -18,10 +56,15 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_OPTIONAL_system=true \
     ENABLE_VIRTUAL_AB := true
 
-# Boot control HAL
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_vendor=true \
+    POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
+    FILESYSTEM_TYPE_vendor=ext4 \
+    POSTINSTALL_OPTIONAL_vendor=true
+
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.0-impl \
-    android.hardware.boot@1.0-service
+    checkpoint_gc \
+    otapreopt_script
 
 PRODUCT_PACKAGES += \
     bootctrl.kona
@@ -39,17 +82,12 @@ PRODUCT_PACKAGES += \
     update_verifier \
     update_engine_sideload \
     libapexsupport
-# crypto 
-PRODUCT_PACKAGES += \
-    qcom_decrypt \
-    qcom_decrypt_fbe
 
 # fastbootd
 PRODUCT_PACKAGES += \
-	android.hardware.fastboot@1.0-impl-mock \
-	android.hardware.fastboot@1.0-impl-mock.recovery \
-	fastbootd
-    
+    android.hardware.fastboot@1.1-impl-mock \
+    fastbootd
+
 PRODUCT_COPY_FILES += \
     device/moorechip/kona/vendor.prop:system/vendor/vendor.prop
 
