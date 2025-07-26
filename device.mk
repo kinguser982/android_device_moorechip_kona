@@ -81,12 +81,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/moorechip/kona/vendor.prop:system/vendor/vendor.prop
 
-# System Properties Override
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.version.release=13 \
-    ro.build.version.sdk=33 \
-    ro.build.version.security_patch=2024-07-05
-
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
 	$(LOCAL_PATH)
